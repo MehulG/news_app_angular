@@ -5,7 +5,6 @@
   box-shadow: 1px 1px 10px grey;
 }
 .card h2{
-  grid-column: 2/5;
   color: black;
   font-weight: bold;
 }
@@ -15,32 +14,18 @@
   color: #707070;
 }
 .card p{
-  grid-column: 2/5;
   font-weight: 100;
-  margin: 0
-}
-.card h5,h2{
-  margin: 0;
-}
-.card ul{
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 .card a{
   color: blue;
-  grid-column: 4/5;
   text-decoration: none;
 }
-.img{
-  grid-column: 1/2;
-  grid-row: 1/5;
+.card img{
   background: #EFEFEF;
-  font-size: 0.7em;
   text-align: center;
-  max-width: 200px;
+  box-shadow: 1px 1px 8px grey;
 }
-@media only screen and (min-width: 850px){
+@media only screen and (min-width: 500px){
   .card{
     padding: 0.5em;
     grid-template-columns: 1.5fr 2fr 2fr 2fr;
@@ -49,5 +34,73 @@
     font-size: 10pt;
     margin: 0.5%;
     margin-bottom: 1em;
+  }
+  .card h2{
+    grid-column: 2/5;
+  }
+  .card p{
+    grid-column: 2/5;
+    margin: 0;
+  }
+  .card h5,h2{
+    margin: 0;
+  }
+  .card a{
+    grid-column: 4/5;
+  }
+  .card img{
+    grid-column: 1/2;
+    grid-row: 1/5;
+    font-size: 0.7em;
+    max-width: 200px;
+  }
+}
+@media only screen and (max-width: 500px) and (min-width: 300px){
+  .card{
+    justify-content: center;
+    padding: 0.3em;
+    font-size: 10pt;
+    margin: 0.5%;
+    margin-bottom: 0.7em;
+  }
+  .card p,h5,a{
+    margin: 0.5em 0 0 1em;
+  }
+  .card h2{
+    margin: 0.5em 0 0 0.5em;
+  }
+  .card img{
+    margin-top: 1em;
+    margin-left: auto;
+	  margin-right: auto;
+    display: block;
+    font-size: 0.7em;
+    max-width: 300px;
+    max-height: 300px
+  }
+}
+@media only screen and (max-width: 300px){
+  .card{
+    justify-content: center;
+    padding: 0.3em;
+    font-size: 10pt;
+    margin: 0.5%;
+    margin-bottom: 0.7em;
+  }
+  .card p,h2,h5,a{
+    margin: 0.5em 0 0 1em;
+    max-width: 250px;
+  }
+  .card h2{
+    margin: 0.5em 0 0 0.5em;
+  }
+  .img{
+    margin-left: auto;
+	  margin-right: auto;
+    display: block;
+    font-size: 0.7em;
+    margin-top: 0.8em;
+    max-width: 300px;
+    max-height: 300px
   }
 }
