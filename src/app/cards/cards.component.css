@@ -1,22 +1,13 @@
 .card{
-  min-width: 80%;
+  display: grid;
   background: #FFFFFF;
   font-family: 'Hind', sans-serif;
-  font-size: 1em;
   box-shadow: 1px 1px 10px grey;
-  margin: 20px;
-  font-style: normal;
-
 }
 .card h2{
-  color: white;
-  padding-top: 7px;
-  font-style: normal;
-  font-weight: lighter;
-  padding-right: 7px;
-  margin: 7px 7px 7px 0;
-  background-color: black;
-  float: left;
+  grid-column: 2/5;
+  color: black;
+  font-weight: bold;
 }
 .card h5{
   font-style: normal;
@@ -24,12 +15,9 @@
   color: #707070;
 }
 .card p{
+  grid-column: 2/5;
   font-weight: 100;
-  margin: 0;
-  padding: 7px;
-}
-.card p,h2,h5{
-  padding-left: 7px;
+  margin: 0
 }
 .card h5,h2{
   margin: 0;
@@ -39,18 +27,27 @@
   padding: 0;
   list-style: none;
 }
-.link{
+.card a{
   color: blue;
+  grid-column: 4/5;
   text-decoration: none;
-  padding: 7px;
-  margin-bottom: 20px;
 }
 .img{
-  max-width: 150px;
-  max-height: 105px;
+  grid-column: 1/2;
+  grid-row: 1/5;
   background: #EFEFEF;
-  float: left;
-  margin: 7px;
   font-size: 0.7em;
   text-align: center;
+  max-width: 200px;
+}
+@media only screen and (min-width: 850px){
+  .card{
+    padding: 0.5em;
+    grid-template-columns: 1.5fr 2fr 2fr 2fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    font-size: 10pt;
+    margin: 0.5%;
+    margin-bottom: 1em;
+  }
 }
