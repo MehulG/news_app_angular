@@ -1,0 +1,16 @@
+<div>
+  <ul style="margin:0; padding: 0;list-style: none;">
+    <li *ngFor = 'let selected of News'>
+      <div class="card">
+        <img src="{{selected.img_url}}" alt="Image not avilable" class="img">
+        <h2>{{selected.title}}</h2>
+        <br><br><br>
+        <h5>{{selected.source}} &emsp; {{selected.time}}<br> {{selected.author}}</h5>
+        <ul>
+          <li><p>{{selected.description}}</p></li>
+          <li><a href="{{selected.url}}" target="_blank" class = "link">More</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

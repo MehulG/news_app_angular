@@ -1,0 +1,56 @@
+.card{
+  min-width: 80%;
+  background: #FFFFFF;
+  font-family: 'Hind', sans-serif;
+  font-size: 1em;
+  box-shadow: 1px 1px 10px grey;
+  margin: 20px;
+  font-style: normal;
+
+}
+.card h2{
+  color: white;
+  padding-top: 7px;
+  font-style: normal;
+  font-weight: lighter;
+  padding-right: 7px;
+  margin: 7px 7px 7px 0;
+  background-color: black;
+  float: left;
+}
+.card h5{
+  font-style: normal;
+  font-weight: lighter;
+  color: #707070;
+}
+.card p{
+  font-weight: 100;
+  margin: 0;
+  padding: 7px;
+}
+.card p,h2,h5{
+  padding-left: 7px;
+}
+.card h5,h2{
+  margin: 0;
+}
+.card ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.link{
+  color: blue;
+  text-decoration: none;
+  padding: 7px;
+  margin-bottom: 20px;
+}
+.img{
+  max-width: 150px;
+  max-height: 105px;
+  background: #EFEFEF;
+  float: left;
+  margin: 7px;
+  font-size: 0.7em;
+  text-align: center;
+}
