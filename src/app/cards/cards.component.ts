@@ -6,23 +6,59 @@ import {news} from '../news'
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css']
+
 })
 export class CardsComponent implements OnInit {
-//  mango:string;
 
+  key:string ;
+  query:string;
   News:Array<news> = [];
   i:number;
+
   constructor() {
     this.i = 0;
+    this.key = "8018bf1b41aa47d28f1df2bda8e80138";
+//    this.query = 'apple';
   }
 
   ngOnInit() {
-    axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey=8018bf1b41aa47d28f1df2bda8e80138')
+    axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey='+this.key)
     .then(response => {
       console.log(response);
-//      this.mango = response.data.articles["0"].description.replace(/^"(.*)"$/, '$1');
+      this.ResponseFunction(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    }
+
+    fetchResponse(){
+      if(this.query == null || ''){
+        axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey='+this.key)
+        .then(response => {
+          console.log(response);
+          this.ResponseFunction(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      else{
+        console.log(123321);
+        axios.get('https://newsapi.org/v2/everything?language=en&q='+this.query+'&apiKey='+this.key)
+        .then(response => {
+          console.log(response);
+          this.ResponseFunction(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    }
+
+    ResponseFunction(response){
       response.data.articles.forEach(a => {
-//        console.log(a);
         this.News[this.i] = {
         source: a.source.name ,
         author : a.author,
@@ -34,10 +70,12 @@ export class CardsComponent implements OnInit {
         };
         this.i+=1;
       });
-      console.log(this.News);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      this.i = 0;
+    }
+
+    refreshQuery(newQuery:string){
+      this.query = newQuery;
+      console.log(this.query);
+      this.fetchResponse();
     }
 }

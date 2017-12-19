@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+  <style media="screen">
+    .card{
+      padding: 0.5em;
+      display: grid;
+      grid-template-columns: 1.5fr 2fr 2fr 2fr;
+      grid-template-rows: auto;
+      grid-gap: 10px;
+      background: #FFFFFF;
+      font-family: 'Hind', sans-serif;
+      font-size: 1em;
+      box-shadow: 1px 1px 10px grey;
+    }
+    .card h2{
+      grid-column: 2/5;
+      color: white;
+      background-color: black;
+    }
+    .card h5{
+      font-style: normal;
+      font-weight: lighter;
+      color: #707070;
+    }
+    .card p{
+      grid-column: 2/5;
+      font-weight: 100;
+      margin: 0
+    }
+    .card h5,h2{
+      margin: 0;
+    }
+    .card ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .card a{
+      color: blue;
+      grid-column: 4/5;
+      text-decoration: none;
+    }
+    .img{
+      grid-column: 1/2;
+      grid-row: 1/5;
+      background: #EFEFEF;
+      font-size: 0.7em;
+      text-align: center;
+    }
+
+  </style>
+  <body style='background-color:#EFEFEF; margin:0'>
+    <div class="card">
+      <img src="{{selected.img_url}}" alt="Image not avilable" class="img">
+      <h2>{{selected.title}}</h2>
+      <h5>{{selected.source}}</h5>
+      <h5>{{selected.time}}</h5>
+      <h5>{{selected.author}}</h5>
+      <p>{{selected.description}}</p>
+      <a href="{{selected.url}}" target="_blank" class = "link">More</a>
+    </div>
+  </body>
+</html>
