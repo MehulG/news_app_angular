@@ -45,8 +45,11 @@
   .card h5,h2{
     margin: 0;
   }
-  .card a{
+  .link{
     grid-column: 4/5;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1em;
   }
   .card img{
     grid-column: 1/2;

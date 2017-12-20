@@ -15,6 +15,7 @@ export class CardsComponent implements OnInit {
   category:number;
   language:string;
   country:string;
+  position:string;
 
   News:Array<news> = [];
   i:number;
@@ -30,6 +31,7 @@ export class CardsComponent implements OnInit {
     axios.get('https://ipinfo.io/json')
     .then(response => {
     this.country = response.data.country.toLowerCase();
+    this.position=this.country;
     this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
     })
     .catch(function (error) {
@@ -44,7 +46,6 @@ export class CardsComponent implements OnInit {
         source: a.source.name ,
         author : a.author,
         title : a.title,
-        description : a.description,
         url : a.url,
         img_url : a.urlToImage,
         time : a.publishedAt
@@ -53,18 +54,14 @@ export class CardsComponent implements OnInit {
       });
       this.i = 0;
     }
+    description : a.description,
 
   refreshQuery(newQuery:string){
       this.query = newQuery;
       console.log(this.query);
+      this.country = null;
       this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
     }
-
-  langselect(value:string){
-    this.language = value;
-    console.log(this.language)
-    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
-  }
 
   //Main function
   fetchResponse(query:string, lang:string, country:string, category:number, key:string){
@@ -75,7 +72,7 @@ export class CardsComponent implements OnInit {
       }else{
       api_url += 'apiKey='+key+'&country='+country;
     }
-    if(category == ''||category ==null||category == undefined){
+    if(category ==null||category == undefined){
       }else{
       api_url += '&category='+category;
     }
@@ -102,4 +99,22 @@ export class CardsComponent implements OnInit {
       console.log(error);
     });
   }
+
+  //Selectors
+  langselect(value:string){
+    this.language = value;
+    this.country = null;
+    console.log(this.language)
+    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
+  }
+
+  //Home
+  setHome(){
+    this.query = null;
+    this.country = this.position;
+    this.language = 'en';
+    this.category = null;
+    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
+  }
+
 }
