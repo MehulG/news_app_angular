@@ -13,7 +13,7 @@ export class CardsComponent implements OnInit {
   key:string ;
   query:string;
   category:number;
-  language:number;
+  language:string;
   country:string;
 
   News:Array<news> = [];
@@ -22,43 +22,20 @@ export class CardsComponent implements OnInit {
   constructor() {
     this.i = 0;
     this.key = "8018bf1b41aa47d28f1df2bda8e80138";
+    this.language = 'en';
+    this.query = null;
   }
 
   ngOnInit() {
     axios.get('https://ipinfo.io/json')
     .then(response => {
-//      console.log(response.data.country.toLowerCase());
     this.country = response.data.country.toLowerCase();
-    this.defaultfetch();
+    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
     })
     .catch(function (error) {
       console.log(error);
     });
 
-    }
-
-  fetchResponse(){
-      if(this.query == null || ''){
-        axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey='+this.key)
-        .then(response => {
-          console.log(response);
-          this.ResponseFunction(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
-      else{
-        console.log(123321);
-        axios.get('https://newsapi.org/v2/everything?language=en&q='+this.query+'&apiKey='+this.key)
-        .then(response => {
-          console.log(response);
-          this.ResponseFunction(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
     }
 
   ResponseFunction(response){
@@ -80,15 +57,45 @@ export class CardsComponent implements OnInit {
   refreshQuery(newQuery:string){
       this.query = newQuery;
       console.log(this.query);
-      this.fetchResponse();
+      this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
     }
-  defaultfetch(){
-    axios.get('https://newsapi.org/v2/top-headlines?country='+this.country+'&apiKey='+this.key)
+
+  langselect(value:string){
+    this.language = value;
+    console.log(this.language)
+    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
+  }
+
+  //Main function
+  fetchResponse(query:string, lang:string, country:string, category:number, key:string){
+
+    var api_url = 'https://newsapi.org/v2/top-headlines?';
+    if(country == ''||country ==null||country == undefined){
+      api_url += 'apiKey='+key;
+      }else{
+      api_url += 'apiKey='+key+'&country='+country;
+    }
+    if(category == ''||category ==null||category == undefined){
+      }else{
+      api_url += '&category='+category;
+    }
+    if(lang == '' ||lang == null ||lang == undefined){
+      api_url+= '&language=en';
+      }else{
+      api_url+= '&language='+lang;
+    }
+    if(query == '' || query == null|| query == undefined){
+      }else{
+      api_url+= '&q='+query;
+    }
+    this.get_info(api_url);
+  }
+
+  get_info(api_url:string){
+    axios.get(api_url)
     .then(response => {
+      console.log(api_url);
       console.log(response);
-      if(response.data.totalResults == 0){
-        console.log('no results');
-      }
       this.ResponseFunction(response);
     })
     .catch(function (error) {
