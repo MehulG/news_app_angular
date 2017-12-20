@@ -12,20 +12,24 @@ export class CardsComponent implements OnInit {
 
   key:string ;
   query:string;
+  category:number;
+  language:number;
+  country:string;
+
   News:Array<news> = [];
   i:number;
 
   constructor() {
     this.i = 0;
     this.key = "8018bf1b41aa47d28f1df2bda8e80138";
-//    this.query = 'apple';
   }
 
   ngOnInit() {
-    axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey='+this.key)
+    axios.get('https://ipinfo.io/json')
     .then(response => {
-      console.log(response);
-      this.ResponseFunction(response);
+//      console.log(response.data.country.toLowerCase());
+    this.country = response.data.country.toLowerCase();
+    this.defaultfetch();
     })
     .catch(function (error) {
       console.log(error);
@@ -33,7 +37,7 @@ export class CardsComponent implements OnInit {
 
     }
 
-    fetchResponse(){
+  fetchResponse(){
       if(this.query == null || ''){
         axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey='+this.key)
         .then(response => {
@@ -57,7 +61,7 @@ export class CardsComponent implements OnInit {
       }
     }
 
-    ResponseFunction(response){
+  ResponseFunction(response){
       response.data.articles.forEach(a => {
         this.News[this.i] = {
         source: a.source.name ,
@@ -73,9 +77,22 @@ export class CardsComponent implements OnInit {
       this.i = 0;
     }
 
-    refreshQuery(newQuery:string){
+  refreshQuery(newQuery:string){
       this.query = newQuery;
       console.log(this.query);
       this.fetchResponse();
     }
+  defaultfetch(){
+    axios.get('https://newsapi.org/v2/top-headlines?country='+this.country+'&apiKey='+this.key)
+    .then(response => {
+      console.log(response);
+      if(response.data.totalResults == 0){
+        console.log('no results');
+      }
+      this.ResponseFunction(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 }
