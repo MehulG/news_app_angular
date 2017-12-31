@@ -19,9 +19,10 @@ export class CardsComponent implements OnInit {
 
   News:Array<news> = [];
   i:number;
-
+  i_prev:number;
   constructor() {
     this.i = 0;
+    this.i_prev = 0;
     this.key = "8018bf1b41aa47d28f1df2bda8e80138";
     this.language = 'en';
     this.query = null;
@@ -41,6 +42,10 @@ export class CardsComponent implements OnInit {
     }
 
   ResponseFunction(response){
+    var j = 0;
+    for(j = 0; j<= this.i_prev; j++){
+      this.News.pop();
+    }
       response.data.articles.forEach(a => {
         this.News[this.i] = {
         source: a.source.name ,
@@ -48,13 +53,14 @@ export class CardsComponent implements OnInit {
         title : a.title,
         url : a.url,
         img_url : a.urlToImage,
+        description : a.description,
         time : a.publishedAt
         };
         this.i+=1;
       });
+      this.i_prev = this.i;
       this.i = 0;
     }
-    description : a.description,
 
   refreshQuery(newQuery:string){
       this.query = newQuery;
