@@ -121,15 +121,17 @@ export class CardsComponent implements OnInit {
     });
   }
 
-  //Selectors
+//Selectors
   langselect(value:string){
-    this.language = value;
-    this.country = null;
-    console.log(this.language);
-    this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
+    if(value!= 'lang'){
+      this.language = value;
+      this.country = null;
+      console.log(this.language);
+      this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
+    }
   }
 
-  //Home
+//Home
   setHome(){
     this.query = null;
     this.country = this.position;
