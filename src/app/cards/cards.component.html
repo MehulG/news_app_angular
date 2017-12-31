@@ -1,7 +1,6 @@
 <button (click) = 'setHome()'>Home</button>
 
 <div ng-if = "News">
-
   <div class="search">
     <input #query>
     <button (click)="refreshQuery(query.value); query.value=''">search</button>
@@ -51,21 +50,41 @@
       <option value='za'>za</option>
     </select>
   </div> -->
-
-  <ul style="margin:0; padding: 0;list-style: none;">
-    <li *ngFor = 'let selected of News'>
-      <div class="card">
-        <img src="{{selected.img_url}}" alt="Image not avilable" class="img">
-        <h2>{{selected.title}}</h2>
-        <h5>{{selected.source}}</h5>
-        <h5>{{selected.time}}</h5>
-        <h5>{{selected.author}}</h5>
-        <p>{{selected.description}}</p>
-        <div class="link">
-          <a href="{{selected.url}}" target="_blank" class = "link">More</a>
+  <div id="content">
+    <ul style="margin:0; padding: 0;list-style: none;">
+      <li *ngFor = 'let selected of News'>
+        <div class="card">
+          <img src="{{selected.img_url}}" alt="Image not avilable" class="img">
+          <h2>{{selected.title}}</h2>
+          <h5>{{selected.source}}</h5>
+          <h5>{{selected.time}}</h5>
+          <h5>{{selected.author}}</h5>
+          <p>{{selected.description}}</p>
+          <div class="link">
+            <a href="{{selected.url}}" target="_blank" class = "link">More</a>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="loading">
+    <div class="windows8">
+    	<div class="wBall" id="wBall_1">
+    		<div class="wInnerBall"></div>
+    	</div>
+    	<div class="wBall" id="wBall_2">
+    		<div class="wInnerBall"></div>
+    	</div>
+    	<div class="wBall" id="wBall_3">
+    		<div class="wInnerBall"></div>
+    	</div>
+    	<div class="wBall" id="wBall_4">
+    		<div class="wInnerBall"></div>
+    	</div>
+    	<div class="wBall" id="wBall_5">
+    		<div class="wInnerBall"></div>
+    	</div>
+    </div>
+  </div>
 
 </div>

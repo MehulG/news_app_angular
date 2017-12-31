@@ -42,10 +42,12 @@ export class CardsComponent implements OnInit {
     }
 
   ResponseFunction(response){
+    //clearing prev Array
     var j = 0;
     for(j = 0; j<= this.i_prev; j++){
       this.News.pop();
     }
+    //pushing freshly
       response.data.articles.forEach(a => {
         this.News[this.i] = {
         source: a.source.name ,
@@ -60,7 +62,20 @@ export class CardsComponent implements OnInit {
       });
       this.i_prev = this.i;
       this.i = 0;
+      this.removedisp('loading');
+      this.adddisp('content');
     }
+
+  removedisp(id:string){
+    var test = document.getElementById(id);
+    test.classList.add("removedisp");
+  }
+
+  adddisp(id:string){
+    var test = document.getElementById(id);
+    test.classList.remove("removedisp");
+  }
+
 
   refreshQuery(newQuery:string){
       this.query = newQuery;
@@ -69,9 +84,9 @@ export class CardsComponent implements OnInit {
       this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
     }
 
-  //Main function
   fetchResponse(query:string, lang:string, country:string, category:number, key:string){
-
+    this.adddisp('loading');
+    this.removedisp('content');
     var api_url = 'https://newsapi.org/v2/top-headlines?';
     if(country == ''||country ==null||country == undefined){
       api_url += 'apiKey='+key;
@@ -110,7 +125,7 @@ export class CardsComponent implements OnInit {
   langselect(value:string){
     this.language = value;
     this.country = null;
-    console.log(this.language)
+    console.log(this.language);
     this.fetchResponse(this.query,this.language,this.country,this.category,this.key);
   }
 
