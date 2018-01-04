@@ -48,6 +48,15 @@ export class CardsComponent implements OnInit {
       this.News.pop();
     }
     //pushing freshly
+    if(response.data.totalResults == 0){
+      this.removedisp('loading');
+      console.log('No result');
+      var test = document.getElementById('NoResults');
+      test.classList.remove("blank");
+    }
+    else{
+      var test = document.getElementById('NoResults');
+      test.classList.add("blank");
       response.data.articles.forEach(a => {
         this.News[this.i] = {
         source: a.source.name ,
@@ -64,6 +73,7 @@ export class CardsComponent implements OnInit {
       this.i = 0;
       this.removedisp('loading');
       this.adddisp('content');
+    }
     }
 
   removedisp(id:string){
