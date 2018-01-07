@@ -19,6 +19,7 @@
 .header{
   position: fixed;
   width: -webkit-fill-available;
+  width: -moz-available;
   background: #003b46;
   min-height: 1em;
   padding: 5px;
